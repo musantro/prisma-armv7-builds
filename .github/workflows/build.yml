@@ -12,6 +12,9 @@ jobs:
     env:
       SQLITE_MAX_VARIABLE_NUMBER: 250000
       SQLITE_MAX_EXPR_DEPTH: 10000
+      CC: arm-linux-gnueabihf-gcc
+      CXX: arm-linux-gnueabihf-g++
+      AR: arm-linux-gnueabihf-ar
     runs-on: ubuntu-latest
     steps:
       - name: Checkout ${{ github.event.inputs.tag }}
@@ -40,8 +43,9 @@ jobs:
             [target.armv7-unknown-linux-gnueabihf]
             pre-build = [
               "dpkg --add-architecture armhf",
-              "apt-get update && apt-get install --assume-yes libssl-dev:armhf"
+              "apt-get update && apt-get install --assume-yes libssl-dev:armhf gcc-arm-linux-gnueabihf libc6-armhf-cross libc6-dev-armhf-cross"
             ]
+            linker = "arm-linux-gnueabihf-gcc"
           EOF
 
       - name: List files for verification
