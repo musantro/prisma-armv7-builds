@@ -46,6 +46,7 @@ jobs:
               "apt-get update && apt-get install --assume-yes libssl-dev:armhf gcc-arm-linux-gnueabihf libc6-armhf-cross libc6-dev-armhf-cross"
             ]
             linker = "arm-linux-gnueabihf-gcc"
+            exclude = ["query-engine/connector-test-kit-rs/"]
           EOF
 
       - name: List files for verification
